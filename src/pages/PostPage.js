@@ -9,11 +9,13 @@ export default function PostPage() {
   const { userInfo } = useContext(UserContext);
   const { id } = useParams();
   useEffect(() => {
-    fetch(`http://localhost:8080/api/user/post/${id}`).then((response) => {
-      response.json().then((postInfo) => {
-        setPostInfo(postInfo);
-      });
-    });
+    fetch(`https://utiva-blog-api.onrender.com/api/user/post/${id}`).then(
+      (response) => {
+        response.json().then((postInfo) => {
+          setPostInfo(postInfo);
+        });
+      }
+    );
   }, [id]);
 
   if (!postInfo) return "";
@@ -45,7 +47,10 @@ export default function PostPage() {
         </div>
       )}
       <div className="image">
-        <img src={`http://localhost:8080/${postInfo.cover}`} alt="" />
+        <img
+          src={`https://utiva-blog-api.onrender.com/${postInfo.cover}`}
+          alt=""
+        />
       </div>
       <div
         className="content"

@@ -12,13 +12,15 @@ export default function EditPost() {
 
   useEffect(() => {
     try {
-      fetch("http://localhost:8080/api/user/post/" + id).then((response) => {
-        response.json().then((postInfo) => {
-          setTitle(postInfo.title);
-          setContent(postInfo.content);
-          setSummary(postInfo.summary);
-        });
-      });
+      fetch("https://utiva-blog-api.onrender.com/api/user/post/" + id).then(
+        (response) => {
+          response.json().then((postInfo) => {
+            setTitle(postInfo.title);
+            setContent(postInfo.content);
+            setSummary(postInfo.summary);
+          });
+        }
+      );
     } catch (error) {
       alert(error.message);
     }
@@ -34,11 +36,14 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch("http://localhost:8080/api/user/post", {
-      method: "PUT",
-      body: data,
-      credentials: "include",
-    });
+    const response = await fetch(
+      "https://utiva-blog-api.onrender.com/api/user/post",
+      {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      }
+    );
     if (response.ok) {
       setRedirect(true);
     }
