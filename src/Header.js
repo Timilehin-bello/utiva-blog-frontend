@@ -27,21 +27,27 @@ export default function Header() {
   return (
     <header>
       <Link to="/" className="logo">
-        MyBlog
+        Utivest Blog
       </Link>
       <nav>
         {username && (
           <>
-            <Link to="/create">Create new post</Link>
-            <a href onClick={logout}>
+            <button className="button-58">
+              <Link to="/create">CREATE</Link>
+            </button>
+            <button className="button-58" onClick={logout}>
               Logout ({username})
-            </a>
+            </button>
           </>
         )}
         {!username && (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <button className="button-58">
+              <Link to="/login">Login</Link>
+            </button>
+            <button className="button-58">
+              <Link to="/register">Register</Link>
+            </button>
           </>
         )}
       </nav>

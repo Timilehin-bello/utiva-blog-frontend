@@ -10,6 +10,13 @@ export default function Post({
   createdAt,
   author,
 }) {
+  function truncateString(str, num) {
+    if (str.length <= num) {
+      return str;
+    }
+    return str.slice(0, num) + "...";
+  }
+
   return (
     <div className="post">
       <div className="image">
@@ -23,11 +30,11 @@ export default function Post({
         </Link>
         <p className="info">
           <a href className="author">
-            {author.username}
+            {author.username.toUpperCase()}
           </a>
           <time>{formatISO9075(new Date(createdAt))}</time>
         </p>
-        <p className="summary">{summary}</p>
+        <p className="summary"> {truncateString(summary, 200)}</p>
       </div>
     </div>
   );

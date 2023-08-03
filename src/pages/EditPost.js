@@ -11,13 +11,17 @@ export default function EditPost() {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/user/post/" + id).then((response) => {
-      response.json().then((postInfo) => {
-        setTitle(postInfo.title);
-        setContent(postInfo.content);
-        setSummary(postInfo.summary);
+    try {
+      fetch("http://localhost:8080/api/user/post/" + id).then((response) => {
+        response.json().then((postInfo) => {
+          setTitle(postInfo.title);
+          setContent(postInfo.content);
+          setSummary(postInfo.summary);
+        });
       });
-    });
+    } catch (error) {
+      alert(error.message);
+    }
   });
 
   async function updatePost(ev) {
@@ -50,6 +54,7 @@ export default function EditPost() {
         type="title"
         placeholder={"Title"}
         value={title}
+        required
         onChange={(ev) => setTitle(ev.target.value)}
       />
       <input
@@ -57,8 +62,13 @@ export default function EditPost() {
         placeholder={"Summary"}
         value={summary}
         onChange={(ev) => setSummary(ev.target.value)}
+        required
       />
-      <input type="file" onChange={(ev) => setFiles(ev.target.files)} />
+      <input
+        type="file"
+        onChange={(ev) => setFiles(ev.target.files)}
+        required
+      />
       <Editor onChange={setContent} value={content} />
       <button style={{ marginTop: "5px" }}>Update post</button>
     </form>
