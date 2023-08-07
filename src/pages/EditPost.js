@@ -11,20 +11,24 @@ export default function EditPost() {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    try {
-      fetch("https://utiva-blog-api.onrender.com/api/user/post/" + id).then(
-        (response) => {
-          response.json().then((postInfo) => {
-            setTitle(postInfo.title);
-            setContent(postInfo.content);
-            setSummary(postInfo.summary);
-          });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/user/post/${id}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch post data");
         }
-      );
-    } catch (error) {
-      alert(error.message);
-    }
-  });
+        const postInfo = await response.json();
+        setTitle(postInfo.title);
+        setContent(postInfo.content);
+        setSummary(postInfo.summary);
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+    fetchData();
+  }, [id]);
 
   async function updatePost(ev) {
     ev.preventDefault();
@@ -36,14 +40,11 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch(
-      "https://utiva-blog-api.onrender.com/api/user/post",
-      {
-        method: "PUT",
-        body: data,
-        credentials: "include",
-      }
-    );
+    const response = await fetch("http://localhost:8080/api/user/post", {
+      method: "PUT",
+      body: data,
+      credentials: "include",
+    });
     if (response.ok) {
       setRedirect(true);
     }

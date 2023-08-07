@@ -8,14 +8,14 @@ export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const { userInfo } = useContext(UserContext);
   const { id } = useParams();
+
   useEffect(() => {
-    fetch(`https://utiva-blog-api.onrender.com/api/user/post/${id}`).then(
-      (response) => {
-        response.json().then((postInfo) => {
-          setPostInfo(postInfo);
-        });
-      }
-    );
+    fetch(`http://localhost:8080/api/user/post/${id}`) // Use the URL of your proxy server here
+      .then((response) => response.json())
+      .then((postInfo) => {
+        setPostInfo(postInfo);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
 
   if (!postInfo) return "";
@@ -47,10 +47,7 @@ export default function PostPage() {
         </div>
       )}
       <div className="image">
-        <img
-          src={`https://utiva-blog-api.onrender.com/${postInfo.cover}`}
-          alt=""
-        />
+        <img src={`http://localhost:8080/${postInfo.cover}`} alt="" />
       </div>
       <div
         className="content"
