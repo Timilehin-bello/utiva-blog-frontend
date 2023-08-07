@@ -5,7 +5,7 @@ import { UserContext } from "./UserContext";
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
-    fetch("http://localhost:8080/api/user/profile", {
+    fetch("https://utiva-blog-api.onrender.com/api/user/profile", {
       credentials: "include",
     }).then((response) => {
       response.json().then((userInfo) => {
@@ -15,7 +15,7 @@ export default function Header() {
   }, [setUserInfo]);
 
   function logout() {
-    fetch("http://localhost:8080/api/user/logout", {
+    fetch("https://utiva-blog-api.onrender.com/api/user/logout", {
       credentials: "include",
       method: "POST",
     });

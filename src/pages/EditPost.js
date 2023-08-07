@@ -14,7 +14,7 @@ export default function EditPost() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/user/post/${id}`
+          `https://utiva-blog-api.onrender.com/api/user/post/${id}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch post data");
@@ -40,11 +40,14 @@ export default function EditPost() {
     if (files?.[0]) {
       data.set("file", files?.[0]);
     }
-    const response = await fetch("http://localhost:8080/api/user/post", {
-      method: "PUT",
-      body: data,
-      credentials: "include",
-    });
+    const response = await fetch(
+      "https://utiva-blog-api.onrender.com/api/user/post",
+      {
+        method: "PUT",
+        body: data,
+        credentials: "include",
+      }
+    );
     if (response.ok) {
       setRedirect(true);
     }

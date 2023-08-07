@@ -19,11 +19,14 @@ export default function CreatePost() {
     ev.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/api/user/post", {
-        method: "POST",
-        body: data,
-        credentials: "include",
-      });
+      const response = await fetch(
+        "https://utiva-blog-api.onrender.com/api/user/post",
+        {
+          method: "POST",
+          body: data,
+          credentials: "include",
+        }
+      );
       if (response.ok) {
         setRedirect(true);
       }
