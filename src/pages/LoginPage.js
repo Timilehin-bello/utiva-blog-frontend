@@ -9,15 +9,12 @@ export default function LoginPage() {
   const { setUserInfo } = useContext(UserContext);
   async function login(ev) {
     ev.preventDefault();
-    const response = await fetch(
-      "https://utiva-blog-api.onrender.com/api/login",
-      {
-        method: "POST",
-        body: JSON.stringify({ username, password }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      }
-    );
+    const response = await fetch("http://localhost:8080/api/login", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
 
     if (response.ok) {
       response.json().then((userInfo) => {

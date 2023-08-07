@@ -26,7 +26,7 @@ export default function Post({
     try {
       // Send a DELETE request to the API endpoint to delete the post
       const response = await fetch(
-        `https://utiva-blog-api.onrender.com/api/user/post/${_id}`,
+        `http://localhost:8080/api/user/post/${_id}`,
         {
           method: "DELETE",
         }
@@ -50,7 +50,7 @@ export default function Post({
     <div className="post">
       <div className="image">
         <Link to={`/post/${_id}`}>
-          <img src={"https://utiva-blog-api.onrender.com/" + cover} alt="" />
+          <img src={"http://localhost:8080/" + cover} alt="" />
         </Link>
       </div>
       <div className="texts">
@@ -59,10 +59,10 @@ export default function Post({
         </Link>
         <p className="info" style={{ alignItems: "center" }}>
           <a href className="author">
-            {author.username.toUpperCase()}
+            {author?.username.toUpperCase()}
           </a>
           <time>{formatISO9075(new Date(createdAt))}</time>
-          {isAuthenticated.username === author.username && (
+          {isAuthenticated?.username === author?.username && (
             <button
               className="button-58"
               style={{ width: "auto" }}
