@@ -1,4 +1,4 @@
-# Utiva Blog Frontend
+# Utiva Blog FrontEnd
 
 
 ## Installation
